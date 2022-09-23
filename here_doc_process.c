@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 18:24:41 by pfrances          #+#    #+#             */
-/*   Updated: 2022/09/22 17:04:14 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/09/23 16:30:51 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	here_doc_process(char **args, t_utils *utils)
 	limiter = ft_strjoin_with_free(ft_strdup(args[2]), "\n");
 	if (limiter == NULL)
 		return (false);
-	utils->input = calloc(1, sizeof(char));
+	utils->input = ft_calloc(1, sizeof(char));
 	if (utils->input == NULL)
 		return (false);
 	while (1)

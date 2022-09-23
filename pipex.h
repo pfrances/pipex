@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:46 by pfrances          #+#    #+#             */
-/*   Updated: 2022/09/22 18:22:58 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/09/23 19:27:09 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ bool	do_parsing(int argc, char *argv[], char *envp[], t_utils *utils);
 /*		parsing_utils.c		*/
 bool	set_path(t_cmd *cmd, char **env_paths);
 bool	set_name_and_args(char *cmd_str, t_cmd *cmd);
+bool	empty_cmd_process(char *cmd_str, t_cmd *cmd);
 /*		here_doc_process.c	*/
 bool	here_doc_process(char **args, t_utils *utils);
 

@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:18:13 by pfrances          #+#    #+#             */
-/*   Updated: 2022/09/22 17:44:04 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/09/23 19:37:41 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ bool	parse_cmds(char **cmds, t_utils *utils)
 	while (i < utils->nbr_of_cmds)
 	{
 		utils->cmds[i] = malloc(sizeof(t_cmd));
+		// if (cmds[i][0] == '\0'
+		// 	&& empty_cmd_process(cmds[i], utils->cmds[i]) == false)
+		// 	return (false);
 		if (set_name_and_args(cmds[i], utils->cmds[i]) == false)
 			return (false);
 		if (set_path(utils->cmds[i], utils->env_paths) == false)
