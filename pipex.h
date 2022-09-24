@@ -30,6 +30,7 @@
 # define BASH_MSG "bash: "
 # define PERMISSION_DENIED ": Permission denied\n"
 # define PATH_DOES_NOT_EXIST "/does_not_exist"
+# define CMD_DOES_NOT_EXIST "does_not_exist"
 
 typedef struct s_cmd
 {
@@ -69,5 +70,7 @@ bool	prepare_arrays(t_utils *utils);
 
 /*		free_memory.c		*/
 int		free_memory(t_utils *utils, int exit_code);
+void	free_env_paths(char **env_paths);
+void	free_cmds(t_utils *utils);
 
 #endif

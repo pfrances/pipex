@@ -16,7 +16,7 @@ bool	empty_cmd_process(char *cmd_str, t_cmd *cmd)
 {
 	if (cmd_str[0] != '\0')
 		return (true);
-	cmd->name = ft_strdup("does_not_exist");
+	cmd->name = ft_strdup(CMD_DOES_NOT_EXIST);
 	if (cmd->name == NULL)
 		return (false);
 	cmd->args = malloc(sizeof(char *) * 2);
@@ -25,7 +25,7 @@ bool	empty_cmd_process(char *cmd_str, t_cmd *cmd)
 		free(cmd->name);
 		return (false);
 	}
-	cmd->args[0] = ft_strdup("does_not_exist");
+	cmd->args[0] = ft_strdup(CMD_DOES_NOT_EXIST);
 	if (cmd->args[0] == NULL)
 	{
 		free(cmd->args);

@@ -51,10 +51,12 @@ bool	parse_cmds(char **cmds, t_utils *utils)
 	while (i < utils->nbr_of_cmds)
 	{
 		utils->cmds[i] = malloc(sizeof(t_cmd));
-		// if (cmds[i][0] == '\0'
-		// 	&& empty_cmd_process(cmds[i], utils->cmds[i]) == false)
-		// 	return (false);
-		if (set_name_and_args(cmds[i], utils->cmds[i]) == false)
+		if (cmds[i][0] == '\0')
+		{
+			if (empty_cmd_process(cmds[i], utils->cmds[i]) == false)
+				return (false);
+		}
+		else if (set_name_and_args(cmds[i], utils->cmds[i]) == false)
 			return (false);
 		if (set_path(utils->cmds[i], utils->env_paths) == false)
 			return (false);
@@ -66,6 +68,13 @@ bool	parse_cmds(char **cmds, t_utils *utils)
 
 bool	parse_output(char *filename, t_utils *utils)
 {
+	if (access(filename, F_OK) == 0 && access(filename, W_OK) == -1)
+	{
+		ft_putstr_fd(BASH_MSG, STDERR_FILENO);
+		ft_putstr_fd(filename, STDERR_FILENO);
+		ft_putstr_fd(PERMISSION_DENIED, STDERR_FILENO);
+		return (false);
+	}
 	if (utils->has_here_doc == false)
 		utils->output_fd = open(filename, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	else
@@ -108,6 +117,11 @@ bool	do_parsing(int argc, char *argv[], char *envp[], t_utils *utils)
 	if (parse_cmds(&argv[2 + (utils->has_here_doc == true)], utils) == false)
 		return (false);
 	if (parse_output(argv[argc - 1], utils) == false)
+	{
+		free(utils->input);
+		free_env_paths(utils->env_paths);
+		free_cmds(utils);
 		return (false);
+	}
 	return (true);
 }
