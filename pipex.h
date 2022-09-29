@@ -27,7 +27,6 @@
 # define CHILD_PROCESS 0
 # define FILE_DOES_NOT_EXIST_MSG ": No such file or directory\n"
 # define COMMAND_NOT_FOUND ": command not found\n"
-# define BASH_MSG "bash: "
 # define PERMISSION_DENIED ": Permission denied\n"
 # define PATH_DOES_NOT_EXIST "/does_not_exist"
 # define CMD_DOES_NOT_EXIST "does_not_exist"

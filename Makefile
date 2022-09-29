@@ -29,6 +29,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 
+bonus: all
+
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
@@ -41,7 +43,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
+	rm -f $(LIBFT)
 
 re: fclean all
 

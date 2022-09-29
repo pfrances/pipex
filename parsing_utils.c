@@ -117,7 +117,6 @@ bool	set_path(t_cmd *cmd, char **env_paths)
 		return (false);
 	if (error_flag == false && access(cmd->path, X_OK) == -1)
 	{
-		ft_putstr_fd(BASH_MSG, STDERR_FILENO);
 		ft_putstr_fd(cmd->path, STDERR_FILENO);
 		ft_putstr_fd(PERMISSION_DENIED, STDERR_FILENO);
 	}

@@ -20,23 +20,24 @@ bool	parse_input_file(char **args, t_utils *utils)
 		return (here_doc_process(args, utils));
 	if (access(args[1], F_OK) == -1)
 	{
-		ft_putstr_fd(BASH_MSG, STDERR_FILENO);
 		ft_putstr_fd(args[1], STDERR_FILENO);
 		ft_putstr_fd(FILE_DOES_NOT_EXIST_MSG, STDERR_FILENO);
-		return (false);
 	}
 	else if (access(args[1], R_OK) == -1)
 	{
-		ft_putstr_fd(BASH_MSG, STDERR_FILENO);
 		ft_putstr_fd(args[1], STDERR_FILENO);
 		ft_putstr_fd(PERMISSION_DENIED, STDERR_FILENO);
-		return (false);
 	}
-	fd = open(args[1], O_RDONLY);
-	if (fd == -1)
-		return (false);
-	utils->input = read_all(fd);
-	close(fd);
+	else
+	{
+		fd = open(args[1], O_RDONLY);
+		if (fd == -1)
+			return (false);
+		utils->input = read_all(fd);
+		close(fd);
+		return (utils->input != NULL);
+	}
+	utils->input = ft_calloc(1, 1);
 	return (utils->input != NULL);
 }
 
@@ -68,9 +69,8 @@ bool	parse_cmds(char **cmds, t_utils *utils)
 
 bool	parse_output(char *filename, t_utils *utils)
 {
-	if (access(filename, F_OK) == 0 && access(filename, W_OK) == -1)
+	if (access(filename, W_OK) == -1)
 	{
-		ft_putstr_fd(BASH_MSG, STDERR_FILENO);
 		ft_putstr_fd(filename, STDERR_FILENO);
 		ft_putstr_fd(PERMISSION_DENIED, STDERR_FILENO);
 		return (false);
