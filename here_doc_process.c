@@ -25,7 +25,9 @@ bool	here_doc_process(char **args, t_utils *utils)
 		return (false);
 	while (1)
 	{
-		write(STDOUT_FILENO, "> ", 2);
+		if (utils->nbr_of_cmds >= 2)
+			write(STDOUT_FILENO, "pipe ", 5);
+		write(STDOUT_FILENO, "here_doc> ", 10);
 		line = get_next_line_until_limiter(STDIN_FILENO, limiter);
 		if (line == NULL)
 			break ;
