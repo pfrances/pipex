@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:18:13 by pfrances          #+#    #+#             */
-/*   Updated: 2022/09/23 19:37:41 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/09/30 15:48:35 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@ bool	parse_input_file(char **args, t_utils *utils)
 
 	if (utils->has_here_doc == true)
 		return (here_doc_process(args, utils));
-	if (access(args[1], F_OK) == -1)
+	if (access(args[1], F_OK) == -1 || access(args[1], R_OK) == -1)
 	{
 		ft_putstr_fd(args[1], STDERR_FILENO);
-		ft_putstr_fd(FILE_DOES_NOT_EXIST_MSG, STDERR_FILENO);
+		if (access(args[1], F_OK) == -1)
+			ft_putstr_fd(FILE_DOES_NOT_EXIST_MSG, STDERR_FILENO);
+		else
+			ft_putstr_fd(PERMISSION_DENIED, STDERR_FILENO);
 		utils->input = ft_calloc(1, 1);
-	}
-	else if (access(args[1], R_OK) == -1)
-	{
-		ft_putstr_fd(args[1], STDERR_FILENO);
-		ft_putstr_fd(PERMISSION_DENIED, STDERR_FILENO);
-		utils->input = ft_calloc(1, 1);
+		utils->has_input = false;
 	}
 	else
 	{
@@ -109,12 +107,13 @@ bool	do_parsing(int argc, char *argv[], char *envp[], t_utils *utils)
 	utils->has_here_doc = (ft_strncmp(argv[1], "here_doc", 9) == 0);
 	if (argc < 4 + (utils->has_here_doc))
 		return (false);
+	utils->has_input = true;
 	if (parse_input_file(argv, utils) == false)
 		return (false);
 	if (parse_env_paths(envp, utils) == false)
 		return (false);
-	utils->nbr_of_cmds = argc - (3 + (utils->has_here_doc == true));
-	if (parse_cmds(&argv[2 + (utils->has_here_doc == true)], utils) == false)
+	utils->nbr_of_cmds = argc - 3 - utils->has_here_doc - !utils->has_input;
+	if (parse_cmds(&argv[argc - utils->nbr_of_cmds - 1], utils) == false)
 		return (false);
 	if (parse_output(argv[argc - 1], utils) == false)
 	{

@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:46 by pfrances          #+#    #+#             */
-/*   Updated: 2022/09/23 19:27:09 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:01:29 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_cmd
 typedef struct s_utils
 {
 	char	*input;
+	bool	has_input;
 	int		output_fd;
 	int		**fd_array;
 	int		*pids_array;
