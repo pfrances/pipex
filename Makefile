@@ -6,7 +6,7 @@
 #    By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 22:35:44 by pfrances          #+#    #+#              #
-#    Updated: 2022/09/30 16:00:00 by pfrances         ###   ########.fr        #
+#    Updated: 2022/09/30 16:14:07 by pfrances         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,4 +42,4 @@ re: fclean all
 
 bonus: all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
