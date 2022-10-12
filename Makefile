@@ -6,7 +6,7 @@
 #    By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 22:35:44 by pfrances          #+#    #+#              #
-#    Updated: 2022/10/08 15:05:47 by pfrances         ###   ########.fr        #
+#    Updated: 2022/10/12 23:37:24 by pfrances         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,5 @@ re: fclean all
 
 bonus:
 	make all WITH_BONUS=TRUE
-	WITH_BONUS=FALSE
 
 .PHONY: all clean fclean re bonus
