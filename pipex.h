@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:46 by pfrances          #+#    #+#             */
-/*   Updated: 2022/09/30 16:01:29 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/08 15:00:32 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
+# ifndef BONUS
+#  define BONUS 0
+# endif
 # define BUFFER_SIZE 1024
 # define MAIN_PROCESS 1
 # define CHILD_PROCESS 0

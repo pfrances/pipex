@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:48:14 by pfrances          #+#    #+#             */
-/*   Updated: 2022/09/22 17:55:07 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:50:41 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ bool	main_process_job(t_utils *utils)
 	closing_unused_fd(utils, utils->nbr_of_cmds, MAIN_PROCESS);
 	write(utils->fd_array[0][1], utils->input, ft_strlen(utils->input));
 	close(utils->fd_array[0][1]);
-	wait_all_process(utils->nbr_of_cmds);
 	str = read_all(utils->fd_array[utils->nbr_of_cmds][0]);
+	wait_all_process(utils->nbr_of_cmds);
 	if (str == NULL)
 		return (false);
 	close(utils->fd_array[utils->nbr_of_cmds][0]);

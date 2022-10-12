@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:18:13 by pfrances          #+#    #+#             */
-/*   Updated: 2022/09/30 15:48:35 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/08 15:05:18 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ bool	parse_env_paths(char *envp[], t_utils *utils)
 
 bool	do_parsing(int argc, char *argv[], char *envp[], t_utils *utils)
 {
-	utils->has_here_doc = (ft_strncmp(argv[1], "here_doc", 9) == 0);
-	if (argc < 4 + (utils->has_here_doc))
+	utils->has_here_doc = (BONUS && !ft_strncmp(argv[1], "here_doc", 9));
+	if ((BONUS && argc < 4 + (utils->has_here_doc)) || (!BONUS && argc != 5))
 		return (false);
 	utils->has_input = true;
 	if (parse_input_file(argv, utils) == false)

@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 23:22:29 by pfrances          #+#    #+#             */
-/*   Updated: 2022/09/23 19:55:54 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/03 17:55:28 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	set_name_and_args(char *cmd_str, t_cmd *cmd)
 	size_t	i;
 
 	i = 0;
-	while (ft_is_space(cmd_str[i]))
+	while (ft_isspace(cmd_str[i]))
 		i++;
 	while (1)
 	{

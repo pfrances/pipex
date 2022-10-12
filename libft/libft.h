@@ -31,8 +31,6 @@ int		ft_isascii(int c);
 
 int		ft_isprint(int c);
 
-size_t	ft_is_space(char c);
-
 size_t	ft_strlen(const char *str);
 
 void	*ft_memset(void *s, int c, size_t n);
@@ -108,5 +106,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+size_t	ft_isspace(char c);
 
 #endif

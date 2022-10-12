@@ -6,7 +6,7 @@
 #    By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 22:35:44 by pfrances          #+#    #+#              #
-#    Updated: 2022/09/30 16:14:07 by pfrances         ###   ########.fr        #
+#    Updated: 2022/10/08 15:05:47 by pfrances         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,19 +27,30 @@ OBJS = $(SRCS:.c=.o)
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
+ifdef WITH_BONUS
+	CFLAGS += -D BONUS=1
+endif
+
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
+$(LIBFT):
+	make -C $(LIBFT_DIR) bonus
+
 clean:
 	rm -f $(OBJS)
+	make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(LIBFT)
 
 re: fclean all
 
-bonus: all
+bonus:
+	make all WITH_BONUS=TRUE
+	WITH_BONUS=FALSE
 
 .PHONY: all clean fclean re bonus
