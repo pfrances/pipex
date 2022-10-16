@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:18:13 by pfrances          #+#    #+#             */
-/*   Updated: 2022/10/08 15:05:18 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:32:17 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ bool	parse_input_file(char **args, t_utils *utils)
 			ft_putstr_fd(FILE_DOES_NOT_EXIST_MSG, STDERR_FILENO);
 		else
 			ft_putstr_fd(PERMISSION_DENIED, STDERR_FILENO);
-		utils->input = ft_calloc(1, 1);
 		utils->has_input = false;
 	}
 	else
@@ -33,10 +32,10 @@ bool	parse_input_file(char **args, t_utils *utils)
 		fd = open(args[1], O_RDONLY);
 		if (fd == -1)
 			return (false);
-		utils->input = read_all(fd);
-		close(fd);
+		utils->input_fd = fd;
 	}
-	return (utils->input != NULL);
+	utils->hd_str = NULL;
+	return (true);
 }
 
 bool	parse_cmds(char **cmds, t_utils *utils)
@@ -98,7 +97,7 @@ bool	parse_env_paths(char *envp[], t_utils *utils)
 		}
 		i++;
 	}
-	free(utils->input);
+	free(utils->hd_str);
 	return (false);
 }
 
@@ -117,7 +116,7 @@ bool	do_parsing(int argc, char *argv[], char *envp[], t_utils *utils)
 		return (false);
 	if (parse_output(argv[argc - 1], utils) == false)
 	{
-		free(utils->input);
+		free(utils->hd_str);
 		free_env_paths(utils->env_paths);
 		free_cmds(utils);
 		return (false);

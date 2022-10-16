@@ -6,7 +6,7 @@
 #    By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 22:35:44 by pfrances          #+#    #+#              #
-#    Updated: 2022/10/12 23:37:24 by pfrances         ###   ########.fr        #
+#    Updated: 2022/10/17 00:36:30 by pfrances         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS =	pipex.c							\
 		parsing_utils.c					\
 		here_doc_process.c				\
 		free_memory.c					\
+		set_command_pipes.c				\
 		$(GNL_DIR)/get_next_line.c		\
 		$(GNL_DIR)/get_next_line_utils.c
 OBJS = $(SRCS:.c=.o)
@@ -30,6 +31,9 @@ LIBFT = $(LIBFT_DIR)/libft.a
 ifdef WITH_BONUS
 	CFLAGS += -D BONUS=1
 endif
+
+bonus:
+	make all WITH_BONUS=TRUE
 
 all: $(NAME)
 
@@ -48,8 +52,5 @@ fclean: clean
 	rm -f $(LIBFT)
 
 re: fclean all
-
-bonus:
-	make all WITH_BONUS=TRUE
 
 .PHONY: all clean fclean re bonus

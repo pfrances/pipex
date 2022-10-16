@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 15:20:46 by pfrances          #+#    #+#             */
-/*   Updated: 2022/10/08 15:00:32 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:34:04 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ typedef struct s_cmd
 
 typedef struct s_utils
 {
-	char	*input;
+	char	*hd_str;
+	int		input_fd;
 	bool	has_input;
 	int		output_fd;
 	int		**fd_array;
@@ -70,6 +71,9 @@ bool	here_doc_process(char **args, t_utils *utils);
 void	closing_unused_fd(t_utils *utils, size_t index, int flag);
 void	wait_all_process(size_t nbr_of_cmds);
 bool	prepare_arrays(t_utils *utils);
+
+/*		set_command_pipes.c	*/
+void	set_pipes(t_utils *utils, size_t index);
 
 /*		free_memory.c		*/
 int		free_memory(t_utils *utils, int exit_code);

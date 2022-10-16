@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 17:39:17 by pfrances          #+#    #+#             */
-/*   Updated: 2022/10/12 22:51:48 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/13 15:54:53 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*read_all(int fd)
 	if (do_allocation(&str1, &str2) == false)
 		return (NULL);
 	read_count = read(fd, str1, BUFFER_SIZE);
-	if (read_count < 1)
+	if (read_count < 0)
 		return (free_and_return_null(str1, str2));
 	while (read_count == BUFFER_SIZE)
 	{
