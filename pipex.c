@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 15:48:14 by pfrances          #+#    #+#             */
-/*   Updated: 2022/10/17 00:39:29 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/17 01:23:42 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ bool	execute_commands(t_utils *utils, char *envp[])
 		i++;
 	}
 	closing_unused_fd(utils, utils->nbr_of_cmds, MAIN_PROCESS);
-	if (utils->has_here_doc == true)
+	if (utils->has_here_doc == true || utils->has_input == false)
 	{
-		write(utils->fd_array[0][1], utils->hd_str, ft_strlen(utils->hd_str));
+		write(utils->fd_array[0][1], utils->input, ft_strlen(utils->input));
 		close(utils->fd_array[0][1]);
 	}
 	wait_all_process(utils->nbr_of_cmds);
@@ -44,7 +44,7 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_utils	utils;
 
-	if (argc < 4 || do_parsing(argc, argv, envp, &utils) == false)
+	if (argc < 5 || do_parsing(argc, argv, envp, &utils) == false)
 		return (1);
 	if (prepare_arrays(&utils) == false)
 		return (free_memory(&utils, 2));

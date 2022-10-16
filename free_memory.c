@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 23:31:50 by pfrances          #+#    #+#             */
-/*   Updated: 2022/10/16 14:27:23 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/17 00:54:56 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	free_env_paths(char **env_paths)
 int	free_memory(t_utils *utils, int exit_code)
 {
 	free(utils->pids_array);
+	free(utils->input);
 	free_fd_array(utils);
 	if (utils->nbr_of_cmds > 0)
 	{

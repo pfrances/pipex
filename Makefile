@@ -6,7 +6,7 @@
 #    By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/07 22:35:44 by pfrances          #+#    #+#              #
-#    Updated: 2022/10/17 00:36:30 by pfrances         ###   ########.fr        #
+#    Updated: 2022/10/17 00:47:52 by pfrances         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,6 @@ ifdef WITH_BONUS
 	CFLAGS += -D BONUS=1
 endif
 
-bonus:
-	make all WITH_BONUS=TRUE
-
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
@@ -52,5 +49,8 @@ fclean: clean
 	rm -f $(LIBFT)
 
 re: fclean all
+
+bonus:
+	make all WITH_BONUS=TRUE
 
 .PHONY: all clean fclean re bonus

@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:18:13 by pfrances          #+#    #+#             */
-/*   Updated: 2022/10/17 00:32:17 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/17 01:24:18 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ bool	parse_input_file(char **args, t_utils *utils)
 		else
 			ft_putstr_fd(PERMISSION_DENIED, STDERR_FILENO);
 		utils->has_input = false;
+		utils->input = ft_calloc(1, 1);
 	}
 	else
 	{
@@ -33,8 +34,8 @@ bool	parse_input_file(char **args, t_utils *utils)
 		if (fd == -1)
 			return (false);
 		utils->input_fd = fd;
+		utils->input = NULL;
 	}
-	utils->hd_str = NULL;
 	return (true);
 }
 
@@ -97,14 +98,14 @@ bool	parse_env_paths(char *envp[], t_utils *utils)
 		}
 		i++;
 	}
-	free(utils->hd_str);
+	free(utils->input);
 	return (false);
 }
 
 bool	do_parsing(int argc, char *argv[], char *envp[], t_utils *utils)
 {
 	utils->has_here_doc = (BONUS && !ft_strncmp(argv[1], "here_doc", 9));
-	if ((BONUS && argc < 4 + (utils->has_here_doc)) || (!BONUS && argc != 5))
+	if ((BONUS && argc < 5 + (utils->has_here_doc)) || (!BONUS && argc != 5))
 		return (false);
 	utils->has_input = true;
 	if (parse_input_file(argv, utils) == false)
@@ -116,7 +117,7 @@ bool	do_parsing(int argc, char *argv[], char *envp[], t_utils *utils)
 		return (false);
 	if (parse_output(argv[argc - 1], utils) == false)
 	{
-		free(utils->hd_str);
+		free(utils->input);
 		free_env_paths(utils->env_paths);
 		free_cmds(utils);
 		return (false);

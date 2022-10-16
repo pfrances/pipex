@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 00:32:40 by pfrances          #+#    #+#             */
-/*   Updated: 2022/10/17 00:34:52 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/17 01:29:17 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_first_command_pipes(t_utils *utils)
 {
-	if (utils->has_here_doc == true)
+	if (utils->has_here_doc == true || utils->has_input == false)
 	{
 		dup2(utils->fd_array[0][0], STDIN_FILENO);
 		close(utils->fd_array[0][0]);
@@ -24,8 +24,16 @@ void	set_first_command_pipes(t_utils *utils)
 		dup2(utils->input_fd, STDIN_FILENO);
 		close(utils->input_fd);
 	}
-	dup2(utils->fd_array[1][1], STDOUT_FILENO);
-	close(utils->fd_array[1][1]);
+	if (utils->nbr_of_cmds == 1)
+	{
+		dup2(utils->output_fd, STDOUT_FILENO);
+		close(utils->output_fd);
+	}
+	else
+	{
+		dup2(utils->fd_array[1][1], STDOUT_FILENO);
+		close(utils->fd_array[1][1]);
+	}
 }
 
 void	set_last_command_pipes(t_utils *utils)
