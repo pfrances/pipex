@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 23:22:29 by pfrances          #+#    #+#             */
-/*   Updated: 2022/10/03 17:55:28 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/10/18 11:46:28 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ char	*search_cmds_path(char *name, char **env_paths, int *error_flag)
 		i++;
 	}
 	ft_putstr_fd(name, STDERR_FILENO);
-	ft_putstr_fd(COMMAND_NOT_FOUND, STDERR_FILENO);
+	if (ft_strchr(name, '/') == NULL)
+		ft_putstr_fd(COMMAND_NOT_FOUND, STDERR_FILENO);
+	else
+		ft_putstr_fd(FILE_DOES_NOT_EXIST_MSG, STDERR_FILENO);
 	*error_flag = true;
 	return (ft_strdup(PATH_DOES_NOT_EXIST));
 }

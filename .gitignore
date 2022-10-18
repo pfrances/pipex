@@ -4,4 +4,6 @@ txt*
 *.o
 *.a
 *.out
-file*
+*file*
+input
+output
